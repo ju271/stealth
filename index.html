@@ -5,32 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>🔒 Private Access | Secure Conversations</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
       background: #f7f7f7;
       color: #333;
       font-family: 'Segoe UI', sans-serif;
-      font-size: 20px;
-      line-height: 1.6;
-      padding: 0;
+      min-height: 100vh;
+      padding: 20px;
+      font-size: 18px;
+      display: block;
+    }
+
+    @media (min-width: 700px) {
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
 
     .overlay {
-      position: fixed;
+      position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(255, 255, 255, 0.96);
+      background: rgba(255, 255, 255, 0.95);
       z-index: 10;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 30px 20px;
+      padding: 30px;
     }
 
     .overlay .logo {
@@ -82,20 +87,28 @@
     }
 
     .container {
-      background: #fff;
+      background: white;
       border: 1px solid #ddd;
-      padding: 35px 28px;
+      padding: 40px 30px;
       border-radius: 12px;
-      max-width: 480px;
-      width: 90%;
+      max-width: 500px;
+      width: 100%;
       text-align: center;
-      margin: 40px auto;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+      margin: 0 auto;
+      display: none;
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        padding: 24px 18px;
+        margin-top: 40px;
+      }
     }
 
     h1 {
-      font-size: 26px;
-      margin-bottom: 25px;
+      font-size: 24px;
+      margin-bottom: 30px;
       color: #ff4d6d;
       text-transform: uppercase;
     }
@@ -103,6 +116,7 @@
     .step {
       display: none;
       animation: fadeIn 0.5s ease;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
     }
 
     .step.active {
@@ -112,10 +126,10 @@
     .btn {
       background: #ff4d6d;
       color: white;
-      padding: 14px 20px;
+      padding: 12px 18px;
       border: none;
       border-radius: 6px;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: bold;
       cursor: pointer;
       margin-top: 20px;
@@ -150,7 +164,7 @@
       gap: 14px;
       justify-content: center;
       margin-top: 20px;
-      font-size: 18px;
+      font-size: 16px;
       flex-wrap: wrap;
       text-align: center;
     }
@@ -171,24 +185,6 @@
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
-    @media (max-width: 480px) {
-      body {
-        font-size: 17px;
-      }
-
-      .container {
-        padding: 25px 20px;
-      }
-
-      h1 {
-        font-size: 22px;
-      }
-
-      .btn {
-        font-size: 16px;
-      }
-    }
   </style>
 </head>
 <body>
@@ -203,13 +199,12 @@
   </div>
 
   <div class="container" id="main">
-    <div id="countdown" style="font-size: 16px; color: #d32f2f; font-weight: bold; margin-bottom: 10px;">
-      ⏳ Expiring access in <span id="timer">03:00</span>
-    </div>
-
     <h1>ACCESS TO PRIVATE GROUPS</h1>
 
     <div class="step active" id="step1">
+      <div id="countdown" style="font-size: 16px; color: #d32f2f; font-weight: bold; margin-bottom: 15px;">
+        ⏳ Expiring access in <span id="timer">03:00</span>
+      </div>
       <p>Are you 18 or older and want to explore exclusive conversations?</p>
       <button class="btn" onclick="nextStep(1)">✔️ Yes, I am</button>
     </div>
@@ -244,6 +239,7 @@
       document.getElementById("line4")
     ];
     let current = 0;
+
     function animateLines() {
       if (current > 0) {
         lines[current - 1].classList.remove("red");
@@ -267,6 +263,8 @@
       document.getElementById('main').style.display = 'block';
     }
 
+    let currentStep = 1;
+
     function nextStep(step) {
       document.getElementById(`step${step}`).classList.remove('active');
       document.getElementById(`step${step + 1}`).classList.add('active');
@@ -289,11 +287,7 @@
       }
     }
 
-    window.onload = () => {
-      animateLines();
-    };
-
-    // COUNTDOWN SIMULATION
+    // COUNTDOWN
     let totalTime = 180;
     const countdownEl = document.getElementById("countdown");
     const timerEl = document.getElementById("timer");
@@ -314,7 +308,10 @@
       setTimeout(updateTimer, 1000);
     }
 
-    updateTimer();
+    window.onload = () => {
+      animateLines();
+      updateTimer();
+    };
   </script>
 </body>
 </html>
