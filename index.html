@@ -1,29 +1,27 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🔐 Secure Access | Leak Protocol</title>
+  <title>🔒 Private Access | Secure Conversations</title>
   <style>
     body {
       margin: 0;
-      background: #0a0a0a;
-      color: #f1f1f1;
-      font-family: 'Courier New', monospace;
+      background: #f7f7f7;
+      color: #333;
+      font-family: 'Segoe UI', sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       padding: 20px;
-      overflow: hidden;
-      font-size: 18px;
     }
 
     .overlay {
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0,0,0,0.96);
+      background: rgba(255, 255, 255, 0.95);
       z-index: 10;
       display: flex;
       flex-direction: column;
@@ -36,16 +34,24 @@
     .overlay .logo {
       font-size: 20px;
       font-weight: bold;
-      text-transform: uppercase;
       color: #ff4d6d;
-      margin-bottom: 30px;
-      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+
+    .overlay .avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      object-fit: cover;
+      border: 3px solid #ff4d6d;
     }
 
     .step-line {
       opacity: 0;
       transition: color 0.3s, opacity 0.5s;
       margin: 12px 0;
+      font-size: 16px;
     }
 
     .step-line.red {
@@ -55,41 +61,39 @@
 
     .step-line.green {
       opacity: 1;
-      color: #6aff73;
+      color: #4caf50;
     }
 
     .overlay button {
-      background: #ff0033;
+      background: #ff4d6d;
       color: white;
       border: none;
-      padding: 16px 26px;
+      padding: 14px 24px;
       margin-top: 30px;
       font-size: 16px;
-      border-radius: 3px;
+      border-radius: 6px;
       cursor: pointer;
-      font-weight: bold;
+      font-weight: 600;
       display: none;
     }
 
     .container {
-      background: #161616;
-      border: 1px solid #333;
+      background: white;
+      border: 1px solid #ddd;
       padding: 35px 28px;
-      border-radius: 8px;
-      max-width: 480px;
+      border-radius: 12px;
+      max-width: 460px;
       width: 100%;
       text-align: center;
-      box-shadow: 0 0 25px #ff003366;
-      animation: fadeIn 0.6s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
       display: none;
     }
 
     h1 {
-      font-size: 20px;
+      font-size: 22px;
       margin-bottom: 25px;
       color: #ff4d6d;
       text-transform: uppercase;
-      letter-spacing: 1px;
     }
 
     .step {
@@ -102,26 +106,26 @@
     }
 
     .btn {
-      background: #b80000;
+      background: #ff4d6d;
       color: white;
       padding: 12px 18px;
       border: none;
-      border-radius: 3px;
-      font-size: 16px;
+      border-radius: 6px;
+      font-size: 15px;
       font-weight: bold;
       cursor: pointer;
       margin-top: 20px;
-      transition: background 0.3s;
       width: 100%;
       max-width: 260px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
     .btn:hover {
-      background: #d10000;
+      background: #e63c5c;
     }
 
     .progress-container {
-      background: #333;
+      background: #e0e0e0;
       height: 10px;
       width: 100%;
       border-radius: 5px;
@@ -176,35 +180,31 @@
   </style>
 </head>
 <body>
-
-  <!-- OVERLAY INICIAL -->
   <div class="overlay" id="overlay">
-    <div class="logo">[ VERIFYING SITE AVAILABILITY ]</div>
-
-    <p id="line1" class="step-line">Initializing a secure environment...</p>
-    <p id="line2" class="step-line">Checking security layers...</p>
-    <p id="line3" class="step-line">Checking if the website is active: <span id="fake-ip">https://leaked-central...</span></p>
-    <p id="line4" class="step-line">Unlocking in progress...</p>
-
-    <button id="startBtn" onclick="startProtocol()">✅ Enter safely</button>
+    <img class="avatar" src="https://example.com/avatar.jpg" alt="avatar" />
+    <div class="logo">Private Connections 🔒</div>
+    <p id="line1" class="step-line">Waiting for secure access...</p>
+    <p id="line2" class="step-line">Checking availability...</p>
+    <p id="line3" class="step-line">Scanning active groups and channels...</p>
+    <p id="line4" class="step-line">Done. Access ready.</p>
+    <button id="startBtn" onclick="startProtocol()">👉 Connect now</button>
   </div>
 
-  <!-- CONTAINER PRINCIPAL -->
   <div class="container" id="main">
-    <h1>🔐 SECRET SITE PROTOCOL</h1>
+    <h1>ACCESS TO PRIVATE GROUPS</h1>
 
     <div class="step active" id="step1">
-      <p>Can you confirm that you are over 18?</p>
-      <button class="btn" onclick="nextStep(1)">✔️ Yes, I have</button>
+      <p>Are you 18 or older and want to explore exclusive conversations?</p>
+      <button class="btn" onclick="nextStep(1)">✔️ Yes, I am</button>
     </div>
 
     <div class="step" id="step2">
-      <p>This content may contain sensitive material. Would you like to continue?</p>
+      <p>These groups include private media and confidential discussions. Continue?</p>
       <button class="btn" onclick="nextStep(2)">✔️ Continue</button>
     </div>
 
     <div class="step" id="step3">
-      <p>Identity verification</p>
+      <p>Quick access check</p>
       <div class="checkbox-style">
         <input type="checkbox" id="robotCheck" onclick="verifyHuman()">
         <label for="robotCheck">I'm not a robot</label>
@@ -215,29 +215,24 @@
     </div>
 
     <div class="step" id="step4">
-      <p>✔️ Successfully verified.<br>Access granted.</p>
-      <a href="./stealth.html" class="btn">👉 ENTER NOW</a>
+      <p>✔️ Verified.<br>You can now access private groups.</p>
+      <a href="./stealth.html" class="btn">👉 Enter groups now</a>
     </div>
   </div>
 
-  <!-- SCRIPTS -->
   <script>
-    // ANIMAÇÃO DE LINHAS
     const lines = [
       document.getElementById("line1"),
       document.getElementById("line2"),
       document.getElementById("line3"),
       document.getElementById("line4")
     ];
-
     let current = 0;
-
     function animateLines() {
       if (current > 0) {
         lines[current - 1].classList.remove("red");
         lines[current - 1].classList.add("green");
       }
-
       if (current < lines.length) {
         lines[current].classList.add("red");
         setTimeout(() => {
@@ -250,25 +245,18 @@
         }, 800);
       }
     }
-
-    // Liberação após overlay
     function startProtocol() {
       document.getElementById('overlay').style.display = 'none';
       document.getElementById('main').style.display = 'block';
     }
-
-    // Confirmação de idade
     let currentStep = 1;
-
     function nextStep(step) {
       document.getElementById(`step${step}`).classList.remove('active');
       document.getElementById(`step${step + 1}`).classList.add('active');
     }
-
     function verifyHuman() {
       const checkbox = document.getElementById("robotCheck");
       const bar = document.getElementById("progressBar");
-
       if (checkbox.checked) {
         bar.style.width = '0%';
         let progress = 0;
@@ -282,12 +270,9 @@
         }, 200);
       }
     }
-
-    // INICIAR TUDO AO ABRIR PÁGINA
     window.onload = () => {
       animateLines();
     };
   </script>
-
 </body>
 </html>
