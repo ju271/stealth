@@ -15,6 +15,7 @@
       align-items: center;
       min-height: 100vh;
       padding: 20px;
+      font-size: 20px;
     }
 
     .overlay {
@@ -32,15 +33,15 @@
     }
 
     .overlay .logo {
-      font-size: 20px;
+      font-size: 24px;
       font-weight: bold;
       color: #ff4d6d;
       margin-bottom: 15px;
     }
 
     .overlay .avatar {
-      width: 90px;
-      height: 90px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
       margin-bottom: 20px;
       object-fit: cover;
@@ -50,8 +51,9 @@
     .step-line {
       opacity: 0;
       transition: color 0.3s, opacity 0.5s;
-      margin: 12px 0;
-      font-size: 16px;
+      margin: 14px 0;
+      font-size: 20px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
     }
 
     .step-line.red {
@@ -68,30 +70,31 @@
       background: #ff4d6d;
       color: white;
       border: none;
-      padding: 14px 24px;
+      padding: 16px 28px;
       margin-top: 30px;
-      font-size: 16px;
+      font-size: 18px;
       border-radius: 6px;
       cursor: pointer;
       font-weight: 600;
       display: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
 
     .container {
       background: white;
       border: 1px solid #ddd;
-      padding: 35px 28px;
+      padding: 40px 30px;
       border-radius: 12px;
-      max-width: 460px;
+      max-width: 500px;
       width: 100%;
       text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
       display: none;
     }
 
     h1 {
-      font-size: 22px;
-      margin-bottom: 25px;
+      font-size: 26px;
+      margin-bottom: 30px;
       color: #ff4d6d;
       text-transform: uppercase;
     }
@@ -99,6 +102,7 @@
     .step {
       display: none;
       animation: fadeIn 0.5s ease;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
     }
 
     .step.active {
@@ -108,16 +112,16 @@
     .btn {
       background: #ff4d6d;
       color: white;
-      padding: 12px 18px;
+      padding: 14px 20px;
       border: none;
       border-radius: 6px;
-      font-size: 15px;
+      font-size: 18px;
       font-weight: bold;
       cursor: pointer;
       margin-top: 20px;
       width: 100%;
       max-width: 260px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     }
 
     .btn:hover {
@@ -126,15 +130,15 @@
 
     .progress-container {
       background: #e0e0e0;
-      height: 10px;
+      height: 12px;
       width: 100%;
-      border-radius: 5px;
-      margin: 25px 0;
+      border-radius: 6px;
+      margin: 30px 0;
       overflow: hidden;
     }
 
     .progress-bar {
-      height: 10px;
+      height: 12px;
       width: 0%;
       background: #ff4d6d;
       transition: width 0.4s ease;
@@ -143,15 +147,15 @@
     .checkbox-style {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       justify-content: center;
       margin-top: 20px;
-      font-size: 16px;
+      font-size: 18px;
     }
 
     .checkbox-style input {
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       accent-color: #ff4d6d;
     }
 
@@ -168,13 +172,13 @@
 
     @media (max-width: 500px) {
       .container {
-        padding: 28px 20px;
+        padding: 30px 20px;
       }
       h1 {
-        font-size: 18px;
+        font-size: 22px;
       }
       .btn {
-        font-size: 14px;
+        font-size: 16px;
       }
     }
   </style>
@@ -191,6 +195,10 @@
   </div>
 
   <div class="container" id="main">
+    <div id="countdown" style="font-size: 16px; color: #d32f2f; font-weight: bold; margin-bottom: 10px;">
+  ⏳ Expiring access in <span id="timer">03:00</span>
+</div>
+
     <h1>ACCESS TO PRIVATE GROUPS</h1>
 
     <div class="step active" id="step1">
@@ -273,6 +281,29 @@
     window.onload = () => {
       animateLines();
     };
+    // COUNTDOWN LIMIT SIMULATION
+let totalTime = 180; // 3 minutes
+const countdownEl = document.getElementById("countdown");
+const timerEl = document.getElementById("timer");
+
+function updateTimer() {
+  const minutes = Math.floor(totalTime / 60).toString().padStart(2, '0');
+  const seconds = (totalTime % 60).toString().padStart(2, '0');
+  timerEl.textContent = `${minutes}:${seconds}`;
+
+  if (totalTime <= 0) {
+    countdownEl.innerHTML = "⚠️ Session expired. Please refresh.";
+    countdownEl.style.color = "#999";
+    countdownEl.style.fontWeight = "normal";
+    return;
+  }
+
+  totalTime--;
+  setTimeout(updateTimer, 1000);
+}
+
+updateTimer();
+
   </script>
 </body>
 </html>
