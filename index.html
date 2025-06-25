@@ -5,186 +5,190 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>🔒 Private Access | Secure Conversations</title>
   <style>
-  body {
-  margin: 0;
-  background: #f7f7f7;
-  color: #333;
-  font-family: 'Segoe UI', sans-serif;
-  min-height: 100vh;
-  padding: 20px;
-  font-size: 18px;
-  display: block;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-@media (min-width: 700px) {
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-}
+    body {
+      margin: 0;
+      background: #f7f7f7;
+      color: #333;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 20px;
+      line-height: 1.6;
+      padding: 0;
+    }
 
-.overlay {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(255, 255, 255, 0.95);
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 30px;
-}
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(255, 255, 255, 0.96);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px 20px;
+    }
 
-.overlay .logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #ff4d6d;
-  margin-bottom: 15px;
-}
+    .overlay .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #ff4d6d;
+      margin-bottom: 15px;
+    }
 
-.overlay .avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-bottom: 20px;
-  object-fit: cover;
-  border: 3px solid #ff4d6d;
-}
+    .overlay .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      object-fit: cover;
+      border: 3px solid #ff4d6d;
+    }
 
-.step-line {
-  opacity: 0;
-  transition: color 0.3s, opacity 0.5s;
-  margin: 14px 0;
-  font-size: 18px;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-}
+    .step-line {
+      opacity: 0;
+      transition: color 0.3s, opacity 0.5s;
+      margin: 14px 0;
+      font-size: 18px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
 
-.step-line.red {
-  opacity: 1;
-  color: #ff4d6d;
-}
+    .step-line.red {
+      opacity: 1;
+      color: #ff4d6d;
+    }
 
-.step-line.green {
-  opacity: 1;
-  color: #4caf50;
-}
+    .step-line.green {
+      opacity: 1;
+      color: #4caf50;
+    }
 
-.overlay button {
-  background: #ff4d6d;
-  color: white;
-  border: none;
-  padding: 16px 28px;
-  margin-top: 30px;
-  font-size: 18px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  display: none;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
+    .overlay button {
+      background: #ff4d6d;
+      color: white;
+      border: none;
+      padding: 16px 28px;
+      margin-top: 30px;
+      font-size: 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      display: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
 
-.container {
-  background: white;
-  border: 1px solid #ddd;
-  padding: 40px 30px;
-  border-radius: 12px;
-  max-width: 500px;
-  width: 100%;
-  text-align: center;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-  margin: 0 auto;
-}
+    .container {
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 35px 28px;
+      border-radius: 12px;
+      max-width: 480px;
+      width: 90%;
+      text-align: center;
+      margin: 40px auto;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
 
-@media (max-width: 500px) {
-  .container {
-    padding: 24px 18px;
-    margin-top: 40px;
-  }
-}
+    h1 {
+      font-size: 26px;
+      margin-bottom: 25px;
+      color: #ff4d6d;
+      text-transform: uppercase;
+    }
 
-h1 {
-  font-size: 24px;
-  margin-bottom: 30px;
-  color: #ff4d6d;
-  text-transform: uppercase;
-}
+    .step {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
 
-.step {
-  display: none;
-  animation: fadeIn 0.5s ease;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-}
+    .step.active {
+      display: block;
+    }
 
-.step.active {
-  display: block;
-}
+    .btn {
+      background: #ff4d6d;
+      color: white;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+      width: 100%;
+      max-width: 260px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
 
-.btn {
-  background: #ff4d6d;
-  color: white;
-  padding: 12px 18px;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 20px;
-  width: 100%;
-  max-width: 260px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-}
+    .btn:hover {
+      background: #e63c5c;
+    }
 
-.btn:hover {
-  background: #e63c5c;
-}
+    .progress-container {
+      background: #e0e0e0;
+      height: 12px;
+      width: 100%;
+      border-radius: 6px;
+      margin: 30px 0;
+      overflow: hidden;
+    }
 
-.progress-container {
-  background: #e0e0e0;
-  height: 12px;
-  width: 100%;
-  border-radius: 6px;
-  margin: 30px 0;
-  overflow: hidden;
-}
+    .progress-bar {
+      height: 12px;
+      width: 0%;
+      background: #ff4d6d;
+      transition: width 0.4s ease;
+    }
 
-.progress-bar {
-  height: 12px;
-  width: 0%;
-  background: #ff4d6d;
-  transition: width 0.4s ease;
-}
+    .checkbox-style {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      justify-content: center;
+      margin-top: 20px;
+      font-size: 18px;
+      flex-wrap: wrap;
+      text-align: center;
+    }
 
-.checkbox-style {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  justify-content: center;
-  margin-top: 20px;
-  font-size: 16px;
-  flex-wrap: wrap;
-  text-align: center;
-}
+    .checkbox-style input {
+      width: 22px;
+      height: 22px;
+      accent-color: #ff4d6d;
+    }
 
-.checkbox-style input {
-  width: 22px;
-  height: 22px;
-  accent-color: #ff4d6d;
-}
+    a.btn {
+      text-decoration: none;
+      display: block;
+      margin: 25px auto 0;
+    }
 
-a.btn {
-  text-decoration: none;
-  display: block;
-  margin: 25px auto 0;
-}
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+    @media (max-width: 480px) {
+      body {
+        font-size: 17px;
+      }
 
+      .container {
+        padding: 25px 20px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+
+      .btn {
+        font-size: 16px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -200,8 +204,8 @@ a.btn {
 
   <div class="container" id="main">
     <div id="countdown" style="font-size: 16px; color: #d32f2f; font-weight: bold; margin-bottom: 10px;">
-  ⏳ Expiring access in <span id="timer">03:00</span>
-</div>
+      ⏳ Expiring access in <span id="timer">03:00</span>
+    </div>
 
     <h1>ACCESS TO PRIVATE GROUPS</h1>
 
@@ -257,15 +261,17 @@ a.btn {
         }, 800);
       }
     }
+
     function startProtocol() {
       document.getElementById('overlay').style.display = 'none';
       document.getElementById('main').style.display = 'block';
     }
-    let currentStep = 1;
+
     function nextStep(step) {
       document.getElementById(`step${step}`).classList.remove('active');
       document.getElementById(`step${step + 1}`).classList.add('active');
     }
+
     function verifyHuman() {
       const checkbox = document.getElementById("robotCheck");
       const bar = document.getElementById("progressBar");
@@ -282,32 +288,33 @@ a.btn {
         }, 200);
       }
     }
+
     window.onload = () => {
       animateLines();
     };
-    // COUNTDOWN LIMIT SIMULATION
-let totalTime = 180; // 3 minutes
-const countdownEl = document.getElementById("countdown");
-const timerEl = document.getElementById("timer");
 
-function updateTimer() {
-  const minutes = Math.floor(totalTime / 60).toString().padStart(2, '0');
-  const seconds = (totalTime % 60).toString().padStart(2, '0');
-  timerEl.textContent = `${minutes}:${seconds}`;
+    // COUNTDOWN SIMULATION
+    let totalTime = 180;
+    const countdownEl = document.getElementById("countdown");
+    const timerEl = document.getElementById("timer");
 
-  if (totalTime <= 0) {
-    countdownEl.innerHTML = "⚠️ Session expired. Please refresh.";
-    countdownEl.style.color = "#999";
-    countdownEl.style.fontWeight = "normal";
-    return;
-  }
+    function updateTimer() {
+      const minutes = Math.floor(totalTime / 60).toString().padStart(2, '0');
+      const seconds = (totalTime % 60).toString().padStart(2, '0');
+      timerEl.textContent = `${minutes}:${seconds}`;
 
-  totalTime--;
-  setTimeout(updateTimer, 1000);
-}
+      if (totalTime <= 0) {
+        countdownEl.innerHTML = "⚠️ Session expired. Please refresh.";
+        countdownEl.style.color = "#999";
+        countdownEl.style.fontWeight = "normal";
+        return;
+      }
 
-updateTimer();
+      totalTime--;
+      setTimeout(updateTimer, 1000);
+    }
 
+    updateTimer();
   </script>
 </body>
 </html>
